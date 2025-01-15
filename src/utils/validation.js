@@ -1,28 +1,38 @@
-const notEmpty = (name, value) => {
-  if (value === "") {
+const checkName = (name, value) => {  
+  if (!value ) {
     return `Please enter ${name}`;
   }
-  return '';
 };
 const checkEmail = (name, value) => {
   const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/;
-  if (value === "") {
+  if (!value) {
     return `Please enter ${name}`;
   } else if (!emailRegex.test(value)) {
     return `Please enter a valid ${name}`;
   }
-  return '';
+};
+const checkMobileNumber = (name, value) => {
+  const mobileNumberRegex = /^\+?[1-9][0-9]{10}$/
+  if (!value) {
+    return `Please enter ${name}`;
+  } else if (!mobileNumberRegex.test(value)) {
+    return `Please enter a valid ${name}`;    
+  }
 };
 
 const validation = (name, pattern, value) => {
+  
   switch (pattern) {
-    case "notEmpty":
-      return notEmpty(name, value);
+    case "checkName":      
+      return checkName(name, value);
     case "checkEmail":
       return checkEmail(name, value);
+    case "checkMobileNumber":
+      return checkMobileNumber(name, value);
     default:
       return "";
   }
 };
+
 
 export default validation;

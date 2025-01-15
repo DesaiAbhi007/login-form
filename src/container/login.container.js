@@ -1,9 +1,11 @@
 import { useState } from "react";
 import validation from "../utils/validation";
+import { useNavigate } from "react-router-dom";
 
 const LoginContainer = () => {
   const [first, setFirst] = useState({});
   const [error, setError] = useState({});
+  const navigate = useNavigate()
   const handleChange = (e,pattern) => {
     const { name, value } = e.target;
     setError((prev) =>( {...prev,[name]: validation(name,pattern, value)}));
@@ -13,7 +15,7 @@ const LoginContainer = () => {
 
   const handleSubmit = async(e) => {
       e.preventDefault();   
-      const response = await fetch("http://localhost:8000/login", {
+      const response = await fetch("http://localhost:3000/dashboard", {
         method: "POST",
         body: JSON.stringify({...first})
       });
@@ -21,6 +23,7 @@ const LoginContainer = () => {
       if(response.status === 201) {
         console.log("welcome to dashboard");
       }
+      navigate('/dashboard');
   };
 
   const loginData = [
